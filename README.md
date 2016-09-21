@@ -1,6 +1,8 @@
 # RecyclePagerAdapter
 ![ICON](https://github.com/AlexMofer/ProjectX/blob/master/images/icons/recyclepager.png)
 
+项目详细地址：[**ProjectX**](https://github.com/AlexMofer/ProjectX/tree/master/supportplus)(方便统一管理)
+
 实现ViewPager页卡View复用回收的PagerAdapter，只要是页面构造一样，则可以使用复用回收机制，同时也支持设置不同的viewType来实现多种样式的页卡回收复用，套用RecycleView的Adapter实现机制。
 ## 要求
 - com.android.support:support-v4
