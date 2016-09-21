@@ -16,7 +16,7 @@ dependencies {
 }
 ```
 ## 使用
-整体实现，其实不难，使用过RecycleView的话，就可以轻车熟路的实现了，跟其实现方案一模一样。
+整体实现其实不难，使用过RecycleView的话，就可以轻车熟路，跟其实现方案一模一样。
 实现自己的PagerViewHolder，个人习惯在实例化时进行布局inflate，这样打开PagerViewHolder便可以直接找到使用的布局文件：
 ```java
 public class MyPagerViewHolder extends RecyclePagerAdapter.PagerViewHolder {
@@ -32,7 +32,6 @@ public class MyPagerViewHolder extends RecyclePagerAdapter.PagerViewHolder {
 }
 ```
 实现自己的RecyclePagerAdapter：
-完成PagerAdapter绑定，但并未刷新界面及布局：
 ```java
 public class MyRecyclePagerAdapter extends RecyclePagerAdapter<MyPagerViewHolder> {
     
@@ -78,9 +77,9 @@ public class MyRecyclePagerAdapter extends RecyclePagerAdapter<MyPagerViewHolder
 }
 ```
 ## 原理
-其实原理很简单，ViewPager最多构造四个相同类型的页面，但是现实时最多需要当前页面及左右两个页面，第四个页面就可以存起来复用。
+ViewPager最多构造四个相同类型的页面，但是现实时最多需要当前页面及左右两个页面，第四个页面就可以存起来复用。
 Adapter使用一个ArrayList<VH>来存放所有的Holder，当刷新页面时需要重新一个个onBindViewHolder；
-再用一个SparseArray<ArrayList<VH>>来根据viewType存放被回收的不同类新的Holder集合，在destroyItem时候去存储，在instantiateItem时候优先从其内部获取，在没有时再重新创建。
+再用一个SparseArray<ArrayList<VH>>来根据viewType存放在destroyItem时候被回收的不同类型的Holder集合，在instantiateItem时候优先从其内部获取，在没有时再重新创建。
 
 ## 注意
 - notifyDataSetChanged()方法会将所有的未被回收的Holder重新onBindViewHolder一遍，并不是每一个ViewPager的页面都会刷新，但当前显示的绝对会刷新；
