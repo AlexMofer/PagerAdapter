@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RecyclePagerAdapter</string>
+    <string name="recyclepager_title">回收Pager</string>
+    <string name="recyclepager_remove">减少页面</string>
+    <string name="recyclepager_add">增加页面</string>
+    <string name="recyclepager_page">第%1$d页</string>
+</resources>
