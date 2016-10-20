@@ -13,7 +13,7 @@
 ```java
 dependencies {
     ⋯
-    compile 'am.project:supportplus:24.2.1.1'
+    compile 'am.project:supportplus:25.0.0'
     ⋯
 }
 ```
@@ -86,12 +86,3 @@ Adapter使用一个ArrayList\<VH\>来存放所有的Holder；再用一个SparseA
 - notifyDataSetChanged()方法会将所有的未被回收的Holder重新onBindViewHolder一遍，并不是每一个ViewPager的页面都会刷新，但当前显示的绝对会刷新；
 - notifyItemChanged(int position)用于刷新指定的页面坐标的Holder，只有在这个页面处于激活状态时，其才会被刷新。
 - 保持跟其他官方支持库版本一致（如：com.android.support:appcompat-v7），否则可能出现错误
-
-## 历史
-- [**24.2.1**](https://bintray.com/alexmofer/maven/SupportPlus/24.2.1)
-- [**24.2.0**](https://bintray.com/alexmofer/maven/SupportPlus/24.2.0)
-- [**24.1.1**](https://bintray.com/alexmofer/maven/SupportPlus/24.1.1)（- [**说明**](https://github.com/AlexMofer/ProjectX/tree/master/supportplus/history/24.1.1)）
-- [**24.1.0**](https://bintray.com/alexmofer/maven/SupportPlus/24.1.0)
-- [**24.0.0**](https://bintray.com/alexmofer/maven/SupportPlus/24.0.0)
-- [**23.4.1**](https://bintray.com/alexmofer/maven/SupportPlus/23.4.1)
-- [**23.4.0**](https://bintray.com/alexmofer/maven/SupportPlus/23.4.0)（- [**说明**](https://github.com/AlexMofer/ProjectX/tree/master/supportplus/history/23.4.0)）
