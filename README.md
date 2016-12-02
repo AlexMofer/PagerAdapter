@@ -1,5 +1,5 @@
 # RecyclePagerAdapter
-![ICON](https://github.com/AlexMofer/ProjectX/blob/master/images/icons/recyclepager.png)
+![ICON](https://raw.githubusercontent.com/AlexMofer/ProjectX/master/images/icons/recyclepager.png)
 
 项目详细地址：[**ProjectX**](https://github.com/AlexMofer/ProjectX/tree/master/supportplus)(方便统一管理)
 
