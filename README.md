@@ -13,7 +13,7 @@
 ```java
 dependencies {
     ⋯
-    compile 'am.project:supportplus:25.0.0'
+    compile 'am.util:viewpager:25.1.0'
     ⋯
 }
 ```
@@ -86,3 +86,6 @@ Adapter使用一个ArrayList\<VH\>来存放所有的Holder；再用一个SparseA
 - notifyDataSetChanged()方法会将所有的未被回收的Holder重新onBindViewHolder一遍，并不是每一个ViewPager的页面都会刷新，但当前显示的绝对会刷新；
 - notifyItemChanged(int position)用于刷新指定的页面坐标的Holder，只有在这个页面处于激活状态时，其才会被刷新。
 - 保持跟其他官方支持库版本一致（如：com.android.support:appcompat-v7），否则可能出现错误
+
+## 历史
+- [**25.0.0**](https://bintray.com/alexmofer/maven/SupportPlus/25.0.0)

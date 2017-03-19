@@ -11,7 +11,8 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
-import am.view.RecyclePagerAdapter;
+import am.util.viewpager.adapter.RecyclePagerAdapter;
+
 
 public class RecyclePagerActivity extends BaseActivity implements View.OnClickListener {
 

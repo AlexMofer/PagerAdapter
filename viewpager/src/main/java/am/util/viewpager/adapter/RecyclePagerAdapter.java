@@ -1,4 +1,4 @@
-package am.view;
+package am.util.viewpager.adapter;
 
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * RecyclePagerAdapter
  * Created by Alex on 2016/3/16.
  */
+@SuppressWarnings("all")
 public abstract class RecyclePagerAdapter<VH extends RecyclePagerAdapter.PagerViewHolder> extends PagerAdapter {
 
     private ArrayList<VH> holderList = new ArrayList<>();
