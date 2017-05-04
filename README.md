@@ -13,7 +13,7 @@
 ```java
 dependencies {
     ⋯
-    compile 'am.util:viewpager:25.3.0'
+    compile 'am.util:viewpager:25.3.1'
     ⋯
 }
 ```
@@ -79,7 +79,7 @@ public class MyRecyclePagerAdapter extends RecyclePagerAdapter<MyPagerViewHolder
 }
 ```
 ## 原理
-ViewPager最多构造四个相同类型的页面，但是现实时最多需要当前页面及左右两个页面，第四个页面就可以存起来复用。
+ViewPager最多构造四个相同类型的页面，但是显示时最多需要当前页面及左右两个页面，第四个页面就可以存起来复用。
 Adapter使用一个ArrayList\<VH\>来存放所有的Holder；再用一个SparseArray\<ArrayList\<VH\>\>来根据viewType存放在destroyItem时候被回收的不同类型的Holder集合，在instantiateItem时候优先从其内部获取，在没有时再重新创建。
 
 ## 注意
@@ -88,6 +88,7 @@ Adapter使用一个ArrayList\<VH\>来存放所有的Holder；再用一个SparseA
 - 保持跟其他官方支持库版本一致（如：com.android.support:appcompat-v7），否则可能出现错误
 
 ## 历史
+- [**25.3.0**](https://bintray.com/alexmofer/maven/ViewPager/25.3.0)
 - [**25.2.0**](https://bintray.com/alexmofer/maven/ViewPager/25.2.0)
 - [**25.1.1**](https://bintray.com/alexmofer/maven/ViewPager/25.1.1)
 - [**25.1.0**](https://bintray.com/alexmofer/maven/ViewPager/25.1.0)
