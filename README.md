@@ -6,14 +6,14 @@
 实现ViewPager页卡View复用回收的PagerAdapter，只要是页面构造一样，则可以使用复用回收机制，同时也支持设置不同的viewType来实现多种样式的页卡回收复用，套用RecycleView的Adapter实现机制。
 ## 要求
 - com.android.support:support-v4
-- minSdkVersion 9
+- minSdkVersion 14
 - 保持跟其他官方支持库版本一致（如：com.android.support:appcompat-v7）
 
 ## 引用
 ```java
 dependencies {
     ⋯
-    compile 'am.util:viewpager:25.4.0'
+    compile 'am.util:viewpager:26.0.0-alpha1'
     ⋯
 }
 ```
@@ -88,6 +88,7 @@ Adapter使用一个ArrayList\<VH\>来存放所有的Holder；再用一个SparseA
 - 保持跟其他官方支持库版本一致（如：com.android.support:appcompat-v7），否则可能出现错误
 
 ## 历史
+- [**25.4.0**](https://bintray.com/alexmofer/maven/ViewPager/25.4.0)
 - [**25.3.1**](https://bintray.com/alexmofer/maven/ViewPager/25.3.1)
 - [**25.3.0**](https://bintray.com/alexmofer/maven/ViewPager/25.3.0)
 - [**25.2.0**](https://bintray.com/alexmofer/maven/ViewPager/25.2.0)
