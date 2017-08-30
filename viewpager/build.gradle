@@ -2,16 +2,16 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    buildToolsVersion "26.0.1"
 
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1
-        versionName "26.0.0"
+        versionName "26.0.1"
     }
 }
 
 dependencies {
-    compile 'com.android.support:support-fragment:26.0.0'
+    compile 'com.android.support:support-fragment:26.0.1'
 }
