@@ -8,10 +8,10 @@ android {
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1
-        versionName "26.0.0-beta1"
+        versionName "26.0.0-beta2"
     }
 }
 
 dependencies {
-    compile 'com.android.support:support-fragment:26.0.0-beta1'
+    compile 'com.android.support:support-fragment:26.0.0-beta2'
 }
