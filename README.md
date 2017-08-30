@@ -13,7 +13,7 @@
 ```java
 dependencies {
     ⋯
-    compile 'am.util:viewpager:26.0.0-alpha1'
+    compile 'am.util:viewpager:26.0.0-beta1'
     ⋯
 }
 ```
@@ -89,6 +89,7 @@ Adapter使用一个ArrayList\<VH\>来存放所有的Holder；再用一个SparseA
 
 ## 历史
 - [**25.4.0**](https://bintray.com/alexmofer/maven/ViewPager/25.4.0)
+- [**26.0.0-alpha1**](https://bintray.com/alexmofer/maven/ViewPager/26.0.0-alpha1)
 - [**25.3.1**](https://bintray.com/alexmofer/maven/ViewPager/25.3.1)
 - [**25.3.0**](https://bintray.com/alexmofer/maven/ViewPager/25.3.0)
 - [**25.2.0**](https://bintray.com/alexmofer/maven/ViewPager/25.2.0)
