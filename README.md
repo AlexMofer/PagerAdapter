@@ -1,125 +1,77 @@
-# RecyclePagerAdapter
-![ICON](https://raw.githubusercontent.com/AlexMofer/ProjectX/master/images/icons/recyclepager.png)
+ViewPager
+=========
 
-项目详细地址：[**ProjectX**](https://github.com/AlexMofer/ProjectX/tree/master/viewpager)(方便统一管理)
+<img src="icon.png" alt="Icon"/>
 
-实现ViewPager页卡View复用回收的PagerAdapter，只要是页面构造一样，则可以使用复用回收机制，同时也支持设置不同的viewType来实现多种样式的页卡回收复用，套用RecycleView的Adapter实现机制。
-## 要求
-- com.android.support:support-v4
+ViewPager辅助库
+
+源码地址：[ProjectX][1]
+
+[1]: https://github.com/AlexMofer/ProjectX/tree/master/viewpager
+
+介绍
+---
+
+与ViewPager相关的一些工具类：
+- **RecyclePagerAdapter**
+
+    回收复用的PagerAdapter，实现方式类似于RecyclerView.Adapter。
+- **ViewsPagerAdapter**
+
+    普通View列表PagerAdapter
+- **FragmentRemovePagerAdapter**
+
+    FragmentPagerAdapter 与 FragmentStatePagerAdapter的结合体。
+
+先决条件
+----
+
 - minSdkVersion 14
 - 保持跟其他官方支持库版本一致（如：com.android.support:appcompat-v7）
 
-## 引用
+入门
+---
+
+**引用:**
+
 ```java
 dependencies {
-    ⋯
-    compile 'am.util:viewpager:26.0.2'
-    ⋯
+    ...
+    compile 'am.util:viewpager:26.1.0'
+    ...
 }
 ```
-## 使用
-整体实现其实不难，使用过RecycleView的话，就可以轻车熟路，跟其实现方案一模一样。
-实现自己的PagerViewHolder，个人习惯在实例化时进行布局inflate，这样打开PagerViewHolder便可以直接找到使用的布局文件：
-```java
-public class MyPagerViewHolder extends RecyclePagerAdapter.PagerViewHolder {
-    
-    public MyPagerViewHolder(ViewGroup parent) {
-        super(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_recyclepager_page, parent, false));
-    }
-    //应用到页面上的数据
-    public void setData(String data) {
-        ((TextView) itemView).setText(data);
-    }
-}
-```
-实现自己的RecyclePagerAdapter：
-```java
-public class MyRecyclePagerAdapter extends RecyclePagerAdapter<MyPagerViewHolder> {
-    
-    private int itemCount = 5;
-    @Override
-    public int getItemCount() {
-        return itemCount;
-    }
-    
-    @Override
-    public MyPagerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //一般同viewType的Holder创建不会超过四个
-        return new MyPagerViewHolder(parent);
-    }
-    
-    @Override
-    public void onBindViewHolder(MyPagerViewHolder holder, int position) {
-        //处理不同页面的不同数据
-        holder.setData(String.format(Locale.getDefault(),"第%d页", position + 1));
-    }
-    
-    public void add() {
-        itemCount++;
-        notifyDataSetChanged();
-    }
-    
-    public void remove() {
-        itemCount--;
-        itemCount = itemCount < 0 ? 0 : itemCount;
-        notifyDataSetChanged();
-    }
-    
-    @Override
-    public int getItemViewType(int position) {
-        //设置不同类型的页面。
-        return 0;
-    }
-    
-    @Override
-    public void onViewRecycled(VH holder) {
-        //当ViewPager执行destroyItem时，会回收Holder,此时会调用该方法，你可以重写该方法实现你要的效果
-    }
-}
-```
-## 原理
-ViewPager最多构造四个相同类型的页面，但是显示时最多需要当前页面及左右两个页面，第四个页面就可以存起来复用。
-Adapter使用一个ArrayList\<VH\>来存放所有的Holder；再用一个SparseArray\<ArrayList\<VH\>\>来根据viewType存放在destroyItem时候被回收的不同类型的Holder集合，在instantiateItem时候优先从其内部获取，在没有时再重新创建。
 
-## 注意
-- notifyDataSetChanged()方法会将所有的未被回收的Holder重新onBindViewHolder一遍，并不是每一个ViewPager的页面都会刷新，但当前显示的绝对会刷新；
-- notifyItemChanged(int position)用于刷新指定的页面坐标的Holder，只有在这个页面处于激活状态时，其才会被刷新。
-- 保持跟其他官方支持库版本一致（如：com.android.support:appcompat-v7），否则可能出现错误
+注意
+---
 
-## 历史
-- [**26.0.1**](https://bintray.com/alexmofer/maven/ViewPager/26.0.1)
-- [**26.0.0**](https://bintray.com/alexmofer/maven/ViewPager/26.0.0)
-- [**26.0.0-beta2**](https://bintray.com/alexmofer/maven/ViewPager/26.0.0-beta2)
-- [**26.0.0-beta1**](https://bintray.com/alexmofer/maven/ViewPager/26.0.0-beta1)
-- [**25.4.0**](https://bintray.com/alexmofer/maven/ViewPager/25.4.0)
-- [**26.0.0-alpha1**](https://bintray.com/alexmofer/maven/ViewPager/26.0.0-alpha1)
-- [**25.3.1**](https://bintray.com/alexmofer/maven/ViewPager/25.3.1)
-- [**25.3.0**](https://bintray.com/alexmofer/maven/ViewPager/25.3.0)
-- [**25.2.0**](https://bintray.com/alexmofer/maven/ViewPager/25.2.0)
-- [**25.1.1**](https://bintray.com/alexmofer/maven/ViewPager/25.1.1)
-- [**25.1.0**](https://bintray.com/alexmofer/maven/ViewPager/25.1.0)
-- [**25.0.1**](https://bintray.com/alexmofer/maven/ViewPager/25.0.1)
-- [**25.0.0**](https://bintray.com/alexmofer/maven/ViewPager/25.0.0)
-- [**24.2.1**](https://bintray.com/alexmofer/maven/ViewPager/24.2.1)
-- [**24.2.0**](https://bintray.com/alexmofer/maven/ViewPager/24.2.0)
-- [**24.1.1**](https://bintray.com/alexmofer/maven/ViewPager/24.1.1)
-- [**24.1.0**](https://bintray.com/alexmofer/maven/ViewPager/24.1.0)
-- [**24.0.0**](https://bintray.com/alexmofer/maven/ViewPager/24.0.0)
-- [**23.4.0**](https://bintray.com/alexmofer/maven/ViewPager/23.4.0)
-- [**23.3.0**](https://bintray.com/alexmofer/maven/ViewPager/23.3.0)
-- [**23.2.1**](https://bintray.com/alexmofer/maven/ViewPager/23.2.1)
-- [**23.2.0**](https://bintray.com/alexmofer/maven/ViewPager/23.2.0)
-- [**23.1.1**](https://bintray.com/alexmofer/maven/ViewPager/23.1.1)
-- [**23.1.0**](https://bintray.com/alexmofer/maven/ViewPager/23.1.0)
-- [**23.0.1**](https://bintray.com/alexmofer/maven/ViewPager/23.0.1)
-- [**23.0.0**](https://bintray.com/alexmofer/maven/ViewPager/23.0.0)
-- [**22.2.1**](https://bintray.com/alexmofer/maven/ViewPager/22.2.1)
-- [**22.2.0**](https://bintray.com/alexmofer/maven/ViewPager/22.2.0)
-- [**22.1.1**](https://bintray.com/alexmofer/maven/ViewPager/22.1.1)
-- [**22.1.0**](https://bintray.com/alexmofer/maven/ViewPager/22.1.0)
-- [**22.0.0**](https://bintray.com/alexmofer/maven/ViewPager/22.0.0)
-- [**21.0.3**](https://bintray.com/alexmofer/maven/ViewPager/21.0.3)
-- [**21.0.2**](https://bintray.com/alexmofer/maven/ViewPager/21.0.2)
-- [**21.0.0**](https://bintray.com/alexmofer/maven/ViewPager/21.0.0)
-- [**20.0.0**](https://bintray.com/alexmofer/maven/ViewPager/20.0.0)
+- 保持跟其他官方支持库版本一致（如：com.android.support:appcompat-v7），否则可能出现错误。
+
+支持
+---
+
+- Google+: https://plus.google.com/114728839435421501183
+- Gmail: moferalex@gmail.com
+
+如果发现错误，请在此处提出:
+https://github.com/AlexMofer/ProjectX/issues
+
+许可
+---
+
+Copyright (C) 2015 AlexMofer
+
+Licensed to the Apache Software Foundation (ASF) under one or more contributor
+license agreements.  See the NOTICE file distributed with this work for
+additional information regarding copyright ownership.  The ASF licenses this
+file to you under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License.  You may obtain a copy of
+the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
+License for the specific language governing permissions and limitations under
+the License.
