@@ -43,7 +43,7 @@ ViewPager辅助库
 ```java
 dependencies {
     ...
-    compile 'am.util:viewpager:27.0.0'
+    compile 'am.util:viewpager:27.0.1'
     ...
 }
 ```
