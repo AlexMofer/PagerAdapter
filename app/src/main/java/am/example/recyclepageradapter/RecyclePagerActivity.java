@@ -1,9 +1,11 @@
 package am.example.recyclepageradapter;
 
-import android.content.Context;
-import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,23 +16,37 @@ import java.util.Locale;
 import am.util.viewpager.adapter.RecyclePagerAdapter;
 
 
-public class RecyclePagerActivity extends BaseActivity implements View.OnClickListener {
+public class RecyclePagerActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private MyRecyclePagerAdapter adapter;
+    private final MyRecyclePagerAdapter adapter = new MyRecyclePagerAdapter();
+
     @Override
-    protected int getContentViewLayoutResources() {
-        return R.layout.activity_recyclepager;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_recyclepager);
+        Toolbar mToolbar = findViewById(R.id.rp_toolbar);
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
+            mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onBackPressed();
+                }
+            });
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            }
+        }
+        ViewPager vpContent = findViewById(R.id.rp_vp_content);
+        findViewById(R.id.rp_btn_remove).setOnClickListener(this);
+        findViewById(R.id.rp_btn_add).setOnClickListener(this);
+        vpContent.setAdapter(adapter);
     }
 
     @Override
-    protected void initResource(Bundle savedInstanceState) {
-        setSupportActionBar(R.id.rp_toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        ViewPager vpContent = (ViewPager) findViewById(R.id.rp_vp_content);
-        findViewById(R.id.rp_btn_remove).setOnClickListener(this);
-        findViewById(R.id.rp_btn_add).setOnClickListener(this);
-        adapter = new MyRecyclePagerAdapter();
-        vpContent.setAdapter(adapter);
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        adapter.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -45,9 +61,9 @@ public class RecyclePagerActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
-    public class MyPagerViewHolder extends RecyclePagerAdapter.PagerViewHolder {
+    class MyPagerViewHolder extends RecyclePagerAdapter.PagerViewHolder {
 
-        public MyPagerViewHolder(ViewGroup parent) {
+        MyPagerViewHolder(ViewGroup parent) {
             super(LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_recyclepager_page, parent, false));
         }
@@ -57,9 +73,10 @@ public class RecyclePagerActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
-    public class MyRecyclePagerAdapter extends RecyclePagerAdapter<MyPagerViewHolder> {
+    class MyRecyclePagerAdapter extends RecyclePagerAdapter<MyPagerViewHolder> {
 
         private int itemCount = 5;
+
         @Override
         public int getItemCount() {
             return itemCount;
@@ -76,19 +93,15 @@ public class RecyclePagerActivity extends BaseActivity implements View.OnClickLi
                     getString(R.string.recyclepager_page), position + 1));
         }
 
-        public void add() {
+        void add() {
             itemCount++;
             notifyDataSetChanged();
         }
 
-        public void remove() {
+        void remove() {
             itemCount--;
             itemCount = itemCount < 0 ? 0 : itemCount;
             notifyDataSetChanged();
         }
-    }
-
-    public static void startActivity(Context context) {
-        context.startActivity(new Intent(context, RecyclePagerActivity.class));
     }
 }
