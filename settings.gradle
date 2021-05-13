@@ -1,1 +1,3 @@
+rootProject.name = "PagerAdapter"
 include ':app'
+include ':pageradapter'
